@@ -26,7 +26,7 @@ object Server extends LazyLogging:
 
   @main def main(): Unit =
     http.setExecutor(Executors.newVirtualThreadPerTaskExecutor())
-    http.createContext("/", handler)
+    http.createContext("/now", handler)
 
     http.start()
     logger.info(s"*** Http Server started at: $host:$port")
