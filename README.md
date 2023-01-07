@@ -24,4 +24,4 @@ Client
 
 Reference
 ---------
-1. [Java HTTP Server and Virtual Threads] (https://piotrminkowski.com/2022/12/22/java-http-server-and-virtual-threads/)
+1. [Java HTTP Server and Virtual Threads](https://piotrminkowski.com/2022/12/22/java-http-server-and-virtual-threads/)
