@@ -32,5 +32,6 @@ object Server extends LazyLogging:
     http.start()
 
   sys.addShutdownHook {
+    http.stop(0)
     logger.info(s"*** Http Server shutdown at: $host:$port")
   }
