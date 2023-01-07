@@ -28,8 +28,11 @@ object Server extends LazyLogging:
     http.setExecutor(Executors.newVirtualThreadPerTaskExecutor())
     http.createContext("/", handler)
 
-    logger.info(s"*** Http Server started at: $host:$port")
     http.start()
+    logger.info(s"*** Http Server started at: $host:$port")
+    println("*** Press Control-C to terminate server.")
+    
+    Thread.currentThread().join()
 
   sys.addShutdownHook {
     http.stop(3)
