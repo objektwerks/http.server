@@ -37,5 +37,5 @@ object Server extends LazyLogging:
   sys.addShutdownHook {
     http.stop(3)
     logger.info(s"*** Http Server shutdown at: $host:$port")
-    println("*** Server terminated.")
+    println(s"*** Server terminated at: $host:$port")
   }
