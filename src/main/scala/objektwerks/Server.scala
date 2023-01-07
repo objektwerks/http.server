@@ -23,6 +23,7 @@ object Server extends LazyLogging:
     http.createContext("/", handler)
 
     logger.info(s"*** Http Server started at: $host:$port")
+    http.start()
 
   sys.addShutdownHook {
     logger.info(s"*** Http Server shutdown at: $host:$port")
