@@ -1,4 +1,4 @@
 package objektwerks
 
-object HttpServer:
+final case class HttpServer(port: Int):
   
