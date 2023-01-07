@@ -9,17 +9,17 @@ import java.time.Instant
 import java.util.concurrent.Executors
 
 object Server extends LazyLogging:
-  val config = ConfigFactory.load("server.conf")
-  val host = config.getString("host")
-  val port = config.getInt("port")
-  val backlog = config.getInt("backlog")
+  private val config = ConfigFactory.load("server.conf")
+  private val host = config.getString("host")
+  private val port = config.getInt("port")
+  private val backlog = config.getInt("backlog")
 
-  val http = HttpServer.create(InetSocketAddress(port), backlog)
-  val handler = new HttpHandler {
+  private val http = HttpServer.create(InetSocketAddress(port), backlog)
+  private val handler = new HttpHandler {
     override def handle(exchange: HttpExchange): Unit =
       val response = Instant.now.toString
       exchange.sendResponseHeaders(200, response.length())
-      val outputStream = exchange.getResponseBody()
+      val outputStream = exchange.getResponseBody
       outputStream.write(response.getBytes())
       outputStream.close()
   }
