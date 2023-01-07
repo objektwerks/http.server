@@ -17,3 +17,7 @@ object Server extends LazyLogging:
   @main def main(): Unit =
     http.setExecutor(Executors.newVirtualThreadPerTaskExecutor())
     logger.info(s"*** Http Server started at: $host:$port")
+
+  sys.addShutdownHook {
+    logger.info(s"*** Http Server shutdown at: $host:$port")
+  }
