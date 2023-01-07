@@ -5,6 +5,7 @@ import com.typesafe.config.ConfigFactory
 import com.typesafe.scalalogging.LazyLogging
 
 import java.net.InetSocketAddress
+import java.time.Instant
 import java.util.concurrent.Executors
 
 object Server extends LazyLogging:
@@ -15,7 +16,12 @@ object Server extends LazyLogging:
 
   val http = HttpServer.create(InetSocketAddress(port), backlog)
   val handler = new HttpHandler {
-    override def handle(exchange: HttpExchange): Unit = ???
+    override def handle(exchange: HttpExchange): Unit =
+      val response = Instant.now.toString
+      exchange.sendResponseHeaders(200, response.length())
+      val outputStream = exchange.getResponseBody()
+      outputStream.write(response.getBytes())
+      outputStream.close()
   }
 
   @main def main(): Unit =
