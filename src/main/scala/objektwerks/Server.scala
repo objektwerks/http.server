@@ -30,7 +30,7 @@ object Server extends LazyLogging:
 
     http.start()
     logger.info(s"*** Http Server started at: $host:$port")
-    println("*** Press Control-C to terminate server.")
+    println(s"*** Press Control-C to terminate server at: $host:$port")
 
     Thread.currentThread().join()
 
