@@ -11,7 +11,7 @@ object Server extends LazyLogging:
   val config = ConfigFactory.load("server.conf")
   val host = config.getString("host")
   val port = config.getInt("port")
-  val backlog = 0
+  val backlog = config.getInt("backlog")
   val http = HttpServer.create(InetSocketAddress(port), backlog)
 
   @main def main(): Unit =
