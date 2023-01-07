@@ -25,3 +25,6 @@ Client
 Reference
 ---------
 1. [Java HTTP Server and Virtual Threads](https://piotrminkowski.com/2022/12/22/java-http-server-and-virtual-threads/)
+2. [Virtual Threads](openjdk.org/jeps/425)
+3. [Structured Concurrency](openjdk.org/jeps/428)
+4. [Loom](www.marcobehler.com/guides/java-project-loom)
