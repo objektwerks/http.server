@@ -21,3 +21,7 @@ Server
 Client
 ------
 1. curl -v http://localhost:7979/now
+
+Reference
+---------
+1. [Java HTTP Server and Virtual Threads] (https://piotrminkowski.com/2022/12/22/java-http-server-and-virtual-threads/)
