@@ -1,6 +1,10 @@
 Http Server
 -----------
->Http server built using JDK 19 and virtual threads. See .jvmopts.
+>Http server built using JDK 19 and virtual threads.
+
+JDK 19
+------
+See .jvmopts.
 
 Build
 -----
