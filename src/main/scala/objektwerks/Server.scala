@@ -31,10 +31,11 @@ object Server extends LazyLogging:
     http.start()
     logger.info(s"*** Http Server started at: $host:$port")
     println("*** Press Control-C to terminate server.")
-    
+
     Thread.currentThread().join()
 
   sys.addShutdownHook {
     http.stop(3)
     logger.info(s"*** Http Server shutdown at: $host:$port")
+    println("*** Server terminated.")
   }
