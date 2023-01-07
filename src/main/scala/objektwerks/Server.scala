@@ -5,12 +5,15 @@ import com.typesafe.config.ConfigFactory
 import com.typesafe.scalalogging.LazyLogging
 
 import java.net.InetSocketAddress
+import java.util.concurrent.Executors
 
 object Server extends LazyLogging:
   val config = ConfigFactory.load("server.conf")
   val host = config.getString("host")
   val port = config.getInt("port")
   val backlog = 0
-  val http = HttpServer.create(new InetSocketAddress(port), backlog)
+  val http = HttpServer.create(InetSocketAddress(port), backlog)
 
-  @main def main(): Unit = logger.info(s"Http Server started at: $host:$port")
+  @main def main(): Unit =
+    http.setExecutor(Executors.newVirtualThreadPerTaskExecutor())
+    logger.info(s"Http Server started at: $host:$port")
