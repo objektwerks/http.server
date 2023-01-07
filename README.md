@@ -1,3 +1,3 @@
 Http Server
 -----------
->Http server built on JDK and virtual threads.
+>Http server built on JDK 19 and virtual threads.
