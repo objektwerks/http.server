@@ -6,14 +6,6 @@ JDK 19
 ------
 See .jvmopts.
 
-Build
------
-1. sbt clean compile
-
-Test
-----
-1. sbt clean test
-
 Server
 ------
 1. sbt clean compile run
