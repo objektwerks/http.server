@@ -21,6 +21,7 @@ object Server extends LazyLogging:
       exchange.sendResponseHeaders(200, response.length())
       val outputStream = exchange.getResponseBody
       outputStream.write(response.getBytes())
+      outputStream.flush()
       outputStream.close()
   }
 
