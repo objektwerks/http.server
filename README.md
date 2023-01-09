@@ -4,7 +4,8 @@ Http Server
 
 JDK 19
 ------
-See .jvmopts.
+>To enable preview features and load modules see .jvmopts, configured
+>as: ```"--enable-preview --add-modules jdk.incubator.concurrent"```
 
 Server
 ------
