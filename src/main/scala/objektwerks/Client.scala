@@ -9,7 +9,7 @@ import java.time.Duration
 import java.time.temporal.ChronoUnit.SECONDS
 
 object Client extends LazyLogging:
-  def call(url: String,
+  def post(url: String,
            requestJson: String): String =
     logger.info(s"url: $url")
     logger.info(s"request json: $requestJson")
@@ -25,6 +25,6 @@ object Client extends LazyLogging:
     
     val client = HttpClient.newHttpClient
     val responseJson = client.send( request, BodyHandlers.ofString ).body
-    
+
     logger.info(s"response json: $requestJson")
     responseJson
