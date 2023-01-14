@@ -9,6 +9,23 @@ import java.time.Duration
 import java.time.temporal.ChronoUnit.SECONDS
 
 object Client extends LazyLogging:
+  def get(url: String): String =
+    logger.info(s"url: $url")
+
+    val request = HttpRequest
+      .newBuilder
+      .uri(URI(url))
+      .timeout(Duration.of(10, SECONDS))
+      .version(HttpClient.Version.HTTP_2)
+      .GET()
+      .build
+    
+    val client = HttpClient.newHttpClient
+    val response = client.send( request, BodyHandlers.ofString ).body
+
+    logger.info(s"response: $response")
+    response
+
   def post(url: String,
            requestJson: String): String =
     logger.info(s"url: $url")
