@@ -13,6 +13,7 @@ object Client extends LazyLogging:
            requestJson: String): String =
     logger.info(s"url: $url")
     logger.info(s"request json: $requestJson")
+
     val request = HttpRequest
       .newBuilder
       .uri(URI(url))
@@ -24,5 +25,6 @@ object Client extends LazyLogging:
     
     val client = HttpClient.newHttpClient
     val responseJson = client.send( request, BodyHandlers.ofString ).body
+    
     logger.info(s"response json: $requestJson")
     responseJson
