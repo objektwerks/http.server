@@ -26,7 +26,7 @@ object Server extends LazyLogging:
   }
 
   @main def main(): Unit =
-    http.setExecutor(Executors.newVirtualThreadPerTaskExecutor())
+    http.setExecutor( Executors.newVirtualThreadPerTaskExecutor() )
     http.createContext("/now", handler)
 
     http.start()
