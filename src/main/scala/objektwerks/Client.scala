@@ -21,7 +21,7 @@ object Client extends LazyLogging:
     val request = HttpRequest
       .newBuilder
       .uri(URI(url))
-      .timeout(Duration.of(10, SECONDS))
+      .timeout(Duration.of(30, SECONDS))
       .version(HttpClient.Version.HTTP_2)
       .GET()
       .build
@@ -39,7 +39,7 @@ object Client extends LazyLogging:
     val request = HttpRequest
       .newBuilder
       .uri(URI(url))
-      .timeout(Duration.of(10, SECONDS))
+      .timeout(Duration.of(30, SECONDS))
       .version(HttpClient.Version.HTTP_2)
       .headers("Content-Type", "application/json; charset=UTF-8", "Accept", "application/json")
       .POST( HttpRequest.BodyPublishers.ofString(requestJson) )
