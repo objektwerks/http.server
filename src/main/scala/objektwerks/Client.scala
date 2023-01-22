@@ -49,8 +49,10 @@ object Client extends LazyLogging:
     logger.info(s"*** get http response: $response")
     response
 
+  // See: https://github.com/objektwerks/pool.balance/blob/main/client/src/main/scala/pool/Fetcher.scala
+  // for how to pass in a higher order function and just return Unit.
   def post(url: String,
-           requestJson: String): Future[String] = // Or use Future[Either[Exception, String]]
+           requestJson: String): Future[String] = // Or Future[Either[Exception, String]]
     logger.info(s"*** post url: $url")
     logger.info(s"*** post request json: $requestJson")
 
@@ -63,8 +65,6 @@ object Client extends LazyLogging:
       .POST( HttpRequest.BodyPublishers.ofString(requestJson) )
       .build
     
-    // See: https://github.com/objektwerks/pool.balance/blob/main/client/src/main/scala/pool/Fetcher.scala
-    // for how to pass in a higher order function and just return Unit.
     sendAsyncHttpRequest(httpRequest).map { httpResponse =>
       val responseJson = httpResponse.body
       logger.info(s"*** post response json: $responseJson")
