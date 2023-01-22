@@ -63,6 +63,8 @@ object Client extends LazyLogging:
       .POST( HttpRequest.BodyPublishers.ofString(requestJson) )
       .build
     
+    // See: https://github.com/objektwerks/pool.balance/blob/main/client/src/main/scala/pool/Fetcher.scala
+    // for how to pass in a higher order function and just return Unit.
     sendAsyncHttpRequest(httpRequest).map { httpResponse =>
       val responseJson = httpResponse.body
       logger.info(s"*** post response json: $responseJson")
