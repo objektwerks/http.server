@@ -21,9 +21,6 @@ object Client extends LazyLogging:
                          .executor( Executors.newVirtualThreadPerTaskExecutor() )
                          .build()
 
-  private def sendAsyncHttpRequest(httpRequest: HttpRequest): Future[HttpResponse[String]] =
-    client.sendAsync( httpRequest, BodyHandlers.ofString ).asScala
-
   private def sendBlockingHttpRequest(httpRequest: HttpRequest): HttpResponse[String] =
     val future = Future {
       blocking {
@@ -32,10 +29,13 @@ object Client extends LazyLogging:
     }
     Await.result(future, 30.seconds)
 
+  private def sendAsyncHttpRequest(httpRequest: HttpRequest): Future[HttpResponse[String]] =
+    client.sendAsync( httpRequest, BodyHandlers.ofString ).asScala
+
   def get(url: String): String =
     logger.info(s"*** get url: $url")
 
-    val request = HttpRequest
+    val httpRequest = HttpRequest
       .newBuilder
       .uri(URI(url))
       .timeout(Duration.of(30, SECONDS))
@@ -43,9 +43,10 @@ object Client extends LazyLogging:
       .GET()
       .build
     
-    val response = client.send( request, BodyHandlers.ofString ).body
+    val httpResponse = sendBlockingHttpRequest(httpRequest)
+    val response = httpResponse.body
 
-    logger.info(s"*** get response: $response")
+    logger.info(s"*** get http response: $response")
     response
 
   def post(url: String,
