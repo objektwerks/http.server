@@ -50,11 +50,11 @@ object Client extends LazyLogging:
     response
 
   def post(url: String,
-           requestJson: String): String =
+           requestJson: String): Future[String] =
     logger.info(s"*** post url: $url")
     logger.info(s"*** post request json: $requestJson")
 
-    val request = HttpRequest
+    val httpRequest = HttpRequest
       .newBuilder
       .uri(URI(url))
       .timeout(Duration.of(30, SECONDS))
@@ -63,7 +63,8 @@ object Client extends LazyLogging:
       .POST( HttpRequest.BodyPublishers.ofString(requestJson) )
       .build
     
-    val responseJson = client.send( request, BodyHandlers.ofString ).body
-
-    logger.info(s"*** post response json: $responseJson")
-    responseJson
+    sendAsyncHttpRequest(httpRequest).map { httpResponse =>
+      val responseJson = httpResponse.body
+      logger.info(s"*** post response json: $responseJson")
+      responseJson
+    }.recover { case error: Exception => error.getMessage }
