@@ -69,4 +69,6 @@ object Client extends LazyLogging:
       val responseJson = httpResponse.body
       logger.info(s"*** post response json: $responseJson")
       responseJson
-    }.recover { case error: Exception => error.getMessage }
+    }.recover { case error: Exception =>
+      s"{\"error\":\"${error.getMessage}\"}"
+    }
