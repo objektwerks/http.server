@@ -22,7 +22,7 @@ object Client extends LazyLogging:
                          .build()
 
   private def sendBlockingHttpRequest(httpRequest: HttpRequest): HttpResponse[String] =
-    val future = Future {
+    val future = Future { // Useful for working OFF of a Swing or JavaFx UI thread!
       blocking {
         client.send( httpRequest, BodyHandlers.ofString )
       }
