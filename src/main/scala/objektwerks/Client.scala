@@ -50,7 +50,7 @@ object Client extends LazyLogging:
     response
 
   def post(url: String,
-           requestJson: String): Future[String] =
+           requestJson: String): Future[String] = // You could use an Either[Exception, Future[String]]
     logger.info(s"*** post url: $url")
     logger.info(s"*** post request json: $requestJson")
 
@@ -68,7 +68,7 @@ object Client extends LazyLogging:
     sendAsyncHttpRequest(httpRequest).map { httpResponse =>
       val responseJson = httpResponse.body
       logger.info(s"*** post response json: $responseJson")
-      responseJson
+      responseJson // Or Right(responseJson)
     }.recover { case error: Exception =>
-      s"{\"error\":\"${error.getMessage}\"}"
+      s"{\"error\":\"${error.getMessage}\"}" // Or Left(error)
     }
