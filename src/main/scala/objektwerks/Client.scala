@@ -50,7 +50,7 @@ object Client extends LazyLogging:
     response
 
   def post(url: String,
-           requestJson: String): Future[String] = // You could use an Either[Exception, Future[String]]
+           requestJson: String): Future[String] = // Or use Future[Either[Exception, String]]
     logger.info(s"*** post url: $url")
     logger.info(s"*** post request json: $requestJson")
 
