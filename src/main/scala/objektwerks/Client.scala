@@ -3,17 +3,34 @@ package objektwerks
 import com.typesafe.scalalogging.LazyLogging
 
 import java.net.URI
-import java.net.http.{HttpClient, HttpRequest}
+import java.net.http.{HttpClient, HttpRequest, HttpResponse}
 import java.net.http.HttpResponse.BodyHandlers
 import java.time.Duration
 import java.time.temporal.ChronoUnit.SECONDS
 import java.util.concurrent.Executors
 
+import scala.concurrent.{blocking, Await, ExecutionContext, Future}
+import scala.concurrent.duration.*
+import scala.jdk.FutureConverters.*
+
 object Client extends LazyLogging:
+  implicit private val executionContext: ExecutionContext = ExecutionContext.fromExecutor( Executors.newVirtualThreadPerTaskExecutor() )
+
   private val client = HttpClient
                          .newBuilder()
                          .executor( Executors.newVirtualThreadPerTaskExecutor() )
                          .build()
+
+  private def sendAsyncHttpRequest(httpRequest: HttpRequest): Future[HttpResponse[String]] =
+    client.sendAsync( httpRequest, BodyHandlers.ofString ).asScala
+
+  private def sendBlockingHttpRequest(httpRequest: HttpRequest): HttpResponse[String] =
+    val future = Future {
+      blocking {
+        client.send( httpRequest, BodyHandlers.ofString )
+      }
+    }
+    Await.result(future, 30.seconds)
 
   def get(url: String): String =
     logger.info(s"*** get url: $url")
