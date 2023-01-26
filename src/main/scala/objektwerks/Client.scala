@@ -17,9 +17,9 @@ object Client extends LazyLogging:
   implicit private val executionContext: ExecutionContext = ExecutionContext.fromExecutor( Executors.newVirtualThreadPerTaskExecutor() )
 
   private val client = HttpClient
-                         .newBuilder()
+                         .newBuilder
                          .executor( Executors.newVirtualThreadPerTaskExecutor() )
-                         .build()
+                         .build
 
   private def sendBlockingHttpRequest(httpRequest: HttpRequest): HttpResponse[String] =
     val future = Future { // Useful for working OFF of a Swing or JavaFx UI thread!
