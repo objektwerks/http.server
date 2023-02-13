@@ -19,7 +19,7 @@ object Server extends LazyLogging:
   private val filter = CorsFilter()
   private val http = HttpServer
     .create(
-      InetSocketAddress(port),
+      address,
       backlog,
       "/now",
       handler,
