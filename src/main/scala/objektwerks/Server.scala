@@ -12,9 +12,9 @@ object Server extends LazyLogging:
   private val config = ConfigFactory.load("server.conf")
   private val host = config.getString("host")
   private val port = config.getInt("port")
-  private val backlog = config.getInt("backlog")
-
-  private val http = HttpServer.create(InetSocketAddress(port), backlog)
+  private val address = InetSocketAddress(port)
+  private val backlog = 0
+  private val path = "/now"
   private val handler = new HttpHandler {
     override def handle(exchange: HttpExchange): Unit =
       val response = Instant.now.toString
@@ -24,11 +24,18 @@ object Server extends LazyLogging:
       outputStream.flush()
       outputStream.close()
   }
+  private val filter = CorsFilter()
+  private val http = HttpServer
+    .create(
+      InetSocketAddress(port),
+      backlog,
+      "/now",
+      handler,
+      filter
+    )
 
   @main def main(): Unit =
     http.setExecutor( Executors.newVirtualThreadPerTaskExecutor() )
-    val context = http.createContext("/now", handler)
-    context.getFilters().add( CorsFilter() )
 
     http.start()
     logger.info(s"*** Http Server started at: $host:$port")
