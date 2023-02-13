@@ -15,15 +15,7 @@ object Server extends LazyLogging:
   private val address = InetSocketAddress(port)
   private val backlog = 0
   private val path = "/now"
-  private val handler = new HttpHandler {
-    override def handle(exchange: HttpExchange): Unit =
-      val response = Instant.now.toString
-      exchange.sendResponseHeaders(200, response.length())
-      val outputStream = exchange.getResponseBody
-      outputStream.write(response.getBytes())
-      outputStream.flush()
-      outputStream.close()
-  }
+  private val handler = NowHandler()
   private val filter = CorsFilter()
   private val http = HttpServer
     .create(
@@ -36,8 +28,8 @@ object Server extends LazyLogging:
 
   @main def main(): Unit =
     http.setExecutor( Executors.newVirtualThreadPerTaskExecutor() )
-
     http.start()
+    
     logger.info(s"*** Http Server started at: $host:$port")
     println(s"*** Press Control-C to shutdown server at: $host:$port")
 
