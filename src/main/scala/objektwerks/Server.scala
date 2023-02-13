@@ -27,7 +27,8 @@ object Server extends LazyLogging:
 
   @main def main(): Unit =
     http.setExecutor( Executors.newVirtualThreadPerTaskExecutor() )
-    http.createContext("/now", handler)
+    val context = http.createContext("/now", handler)
+    context.getFilters().add( CorsFilter() )
 
     http.start()
     logger.info(s"*** Http Server started at: $host:$port")
