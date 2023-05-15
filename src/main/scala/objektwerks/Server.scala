@@ -1,11 +1,10 @@
 package objektwerks
 
-import com.sun.net.httpserver.{HttpExchange, HttpHandler, HttpServer}
+import com.sun.net.httpserver.HttpServer
 import com.typesafe.config.ConfigFactory
 import com.typesafe.scalalogging.LazyLogging
 
 import java.net.InetSocketAddress
-import java.time.Instant
 import java.util.concurrent.Executors
 
 object Server extends LazyLogging:
@@ -21,7 +20,7 @@ object Server extends LazyLogging:
     .create(
       address,
       backlog,
-      "/now",
+      path,
       handler,
       filter
     )
