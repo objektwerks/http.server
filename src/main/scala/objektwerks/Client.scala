@@ -14,7 +14,7 @@ import scala.concurrent.duration.*
 import scala.jdk.FutureConverters.*
 
 object Client extends LazyLogging:
-  implicit private val executionContext: ExecutionContext = ExecutionContext.fromExecutor( Executors.newVirtualThreadPerTaskExecutor() )
+  given executionContext: ExecutionContext = ExecutionContext.fromExecutor( Executors.newVirtualThreadPerTaskExecutor() )
 
   private val client = HttpClient
                          .newBuilder
