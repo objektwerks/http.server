@@ -2,11 +2,6 @@ Http Server
 -----------
 >Http server and client built using JDK 21, virtual threads and Scala 3.
 
-JDK 19
-------
->To enable preview features and load modules see .jvmopts, configured
->as: ```"--enable-preview --add-modules jdk.incubator.concurrent"```
-
 Server
 ------
 >See Server.
