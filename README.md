@@ -14,7 +14,7 @@ Client
 
 Reference
 ---------
-1. [Java HTTP Server and Virtual Threads](https://piotrminkowski.com/2022/12/22/java-http-server-and-virtual-threads/)
+1. [JDK Http Server and Virtual Threads](https://piotrminkowski.com/2022/12/22/java-http-server-and-virtual-threads/)
 2. [JDK Http Server Benchmark](https://www.reddit.com/r/java/comments/18vysrr/jdk_http_server_handles_100000_reqsec_with_100_ms/)
 3. [HttpServer Javadoc](https://download.java.net/java/early_access/panama/docs/api/jdk.httpserver/com/sun/net/httpserver/package-summary.html)
 4. [Virtual Threads: JEPS 425](openjdk.org/jeps/425)
