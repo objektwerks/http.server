@@ -19,5 +19,4 @@ Reference
 3. [JDK Http Server Javadoc](https://download.java.net/java/early_access/panama/docs/api/jdk.httpserver/com/sun/net/httpserver/package-summary.html)
 4. [Virtual Threads: JEPS 425](https://openjdk.org/jeps/425)
 5. [Structured Concurrency: JEPS 428](https://openjdk.org/jeps/428)
-6. [Loom](www.marcobehler.com/guides/java-project-loom)
 7. [Virtual Threads](https://github.com/objektwerks/virtual.threads)
