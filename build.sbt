@@ -1,7 +1,7 @@
 name := "http.server"
 organization := "objektwerks"
 version := "0.1-SNAPSHOT"
-scalaVersion := "3.8.2-RC1"
+scalaVersion := "3.8.2-RC2"
 libraryDependencies ++= {
   Seq(
     "com.typesafe" % "config" % "1.4.3",
