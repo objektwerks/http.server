@@ -1,6 +1,6 @@
 Http Server
 -----------
->Http server and client built using JDK 25, virtual threads and Scala 3.
+>Http server and client built using JDK 26, virtual threads and Scala 3.
 
 Server
 ------
